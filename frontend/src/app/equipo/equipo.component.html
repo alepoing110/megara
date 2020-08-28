@@ -1,0 +1,27 @@
+<h1>Lista de equipos</h1>
+  <table class="table ">
+    <thead class="table table-hover">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Serie</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Editar usuario</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let equipo of equipos" >
+        <th>{{equipo.id}}</th>
+        <td>{{equipo.nombre}}</td>
+        <td>{{equipo.serie}}</td>
+        <td>{{equipo.modelo}}</td>
+        <td>{{equipo.marca}}</td>
+        <td>
+            <a class="btn btn-primary btn-sm" routerLink="/editar/equipo/{{equipo.id}}">Ver/Editar</a>
+            <a class="btn btn-primary btn-sm btn-danger" (click)="delete(equipo.id)">Eliminar</a>    
+        </td>
+      </tr>     
+    </tbody>
+  </table>

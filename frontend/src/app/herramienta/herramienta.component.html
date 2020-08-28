@@ -1,0 +1,27 @@
+<h1>Herramientas</h1>
+  <table class="table ">
+    <thead class="table table-hoverk">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Editar herramienta</th>        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let herramienta of herramientas" >
+        <th>{{herramienta.id}}</th>
+        <td>{{herramienta.nombre}}</td>
+        <td>{{herramienta.tipo}}</td>      
+        <td>{{herramienta.precio}}</td>
+        <td>{{herramienta.cantidad}}</td>
+        <td>
+            <a class="btn btn-primary btn-sm" routerLink="/editar/herramienta/{{herramienta.id}}">Ver/Editar</a>
+            <a class="btn btn-ligth btn-sm" routerLink="/editar/herramienta-anadir/{{herramienta.id}}">Añadir</a>   
+            <a class="btn btn-primary btn-sm btn-danger" (click)="delete(herramienta.id)">Eliminar</a>
+        </tr>     
+    </tbody>
+  </table>
+

@@ -1,0 +1,143 @@
+<div class="container">
+    <h1>Generar pedido</h1>
+    <form (ngSubmit)="guardarTodo()" #formulario="ngForm">
+      <div class="row col-sm-2">
+        <div class="form-group">
+          <label for="id">ID </label>
+          <input  [(ngModel)]="pedido.id" type="text" class="form-control" id="id" [value]="ultimo_id" 
+          #id ="ngModel" name="id" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+              <label for="fecha">FECHA</label>
+              <input [(ngModel)]="pedido.fecha" type="date" class="form-control" id="fecha" placeholder="Ingrese fecha"     
+              required minlength="10" name="fecha" #fecha="ngModel" >
+              <div *ngIf="fecha.errors?.required && (fecha.touched||fecha.dirty)" class="alert alert-danger">El campo es obligatorio</div> 
+              
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            
+            <label for="total" edit= "false">TOTAL</label>
+            <input [(ngModel)]="pedido.total" type="text" class="form-control" id="total" 
+             name="total" #total="ngModel" readonly>      
+              
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group ">
+            <label for="usuario_ci">ENCARGADO</label>
+            <select name="usuario_ci" [(ngModel)]="pedido.usuario_ci" class="form-control"   id="usuario_ci" #usuario_ci="ngModel" required>
+            <option [ngValue]="item.ci" *ngFor="let item of encargados">C.I.: {{item.ci}}</option>
+            </select>            
+            <div *ngIf="usuario_ci.errors?.required && usuario_ci.touched" class="alert alert-danger">El campo es obligatorio</div>              
+          </div>
+        </div>
+      </div>
+      <hr width="100%" color="#ff025" />
+      <div class="card">
+        <div class="card-header">DETALLE DEL PEDIDO</div>
+        
+        <div class="col-sm-4">
+            <div class="form-group ">
+              <label for="proveedor">PROVEEDOR</label>
+              <select name="proveedor" [(ngModel)]="proveedor" class="form-control"   id="proveedor" #proveedor_s="ngModel" >
+              <option [ngValue]="itemp" *ngFor="let itemp of proveedores">{{itemp.id}} - {{itemp.nombre}}</option>
+              </select>            
+              <div *ngIf="proveedor_s.errors?.required && (proveedor_s.touched||proveedor_s.dirty)" class="alert alert-danger">El campo es obligatorio</div>              
+            </div>
+          </div>
+
+        <form (ngSubmit) = "anadirHerramienta()" #formH = "ngForm">
+          <div class="row container">          
+            <div class="col-sm-4">
+              <div class="form-group ">
+                <label for="herramienta">HERRAMIENTA</label>
+                <select name="herramienta" [(ngModel)]="herramienta" class="form-control"   id="herramienta" #herramienta_s="ngModel" required>
+                <option [ngValue]="itemh" *ngFor="let itemh of herramientas">{{itemh.id}} - {{itemh.nombre}}</option>
+                </select> 
+                <div *ngIf="herramienta_s.errors?.required && (herramienta_s.touched||herramienta_s.dirty)" class="alert alert-danger">El campo es obligatorio</div>                                      
+              </div>
+            </div>
+  
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="cantidad_h" edit= "false">CANTIDAD </label>
+                <input [(ngModel)]="cantidad_herramienta" type="number" class="form-control" id="cantidad_h" placeholder="Ingrese cantidad"
+                required  name="cantidad_h" #cantidad_h="ngModel" digits>      
+                <div *ngIf="cantidad_h.errors?.required && (cantidad_h.touched||cantidad_h.dirty)" class="alert alert-danger">El campo es obligatorio</div>    
+                <div *ngIf="cantidad_h.errors?.digits && (cantidad_h.touched||cantidad_h.dirty)" class="alert alert-danger">Ingrese solo enteros</div>   
+              </div>
+            </div>
+            <button type="submit" class="btn btn-link" [disabled]="!formH.form.valid">Añadir herramienta</button>
+          </div>
+          
+        </form>
+  
+                          
+        <form (ngSubmit)="anadirInsumo()" #formI = "ngForm">
+
+          <div class="row container">            
+            <div class="col-sm-4">
+              <div class="form-group ">
+                <label for="insumo">INSUMO</label>
+                <select name="insumo" [(ngModel)]="insumo" class="form-control"   id="insumo" #insumo_s="ngModel" required>
+                <option [ngValue]="itemi" *ngFor="let itemi of insumos">{{itemi.id}} - {{itemi.nombre}}</option>
+                </select>   
+                <div *ngIf="insumo_s.errors?.required && (insumo_s.touched||insumo_s.dirty)" class="alert alert-danger">El campo es obligatorio</div>                           
+              </div>
+            </div>    
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="cantidad" edit= "false">CANTIDAD </label>
+                <input [(ngModel)]="cantidad_insumo" type="number" class="form-control" id="cantidad" placeholder="Ingrese cantidad"
+                required  name="cantidad" #cantidad="ngModel" digits>      
+                <div *ngIf="cantidad.errors?.required && (cantidad.touched||cantidad.dirty)" class="alert alert-danger">El campo es obligatorio</div>    
+                <div *ngIf="cantidad.errors?.digits && (cantidad.touched||cantidad.dirty)" class="alert alert-danger">Ingrese solo enteros</div>   
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-link" [disabled]="!formI.form.valid">Añadir insumo</button>
+          </div>
+          
+        </form>
+      </div>
+      
+      <div class="containder" align = "center">
+        <table class="table ">
+          <thead class="table table-hover">
+            <tr>
+              <th scope="col">ID </th>
+              <th scope="col">ID I.</th>
+              <th scope="col">ID H.</th>
+              <th scope="col">ID PROV.</th>
+              <th scope="col">NOMBRE I.</th>
+              <th scope="col">NOMBRE H.</th>
+              <th scope="col">CANT.</th>
+              <th scope="col">PRECIO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor = "let itemd of detalleCompleto">
+              <th>{{ultimo_id}}</th>
+              <td>{{itemd.insumo_id}}</td>
+              <td>{{itemd.herramienta_id}}</td>               
+              <td>{{itemd.proveedor_id}}</td>
+              <td>{{itemd.insumo_nombre}}</td>          
+              <td>{{itemd.herramienta_nombre}}</td>          
+              <td>{{itemd.cantidad}}</td>          
+              <td>{{itemd.precio}}</td>           
+          </tbody>
+        </table>
+
+      </div>
+      
+      <button type="submit" class="btn btn-primary" [disabled]="!formulario.form.valid">Guardar e imprimir</button>
+      </form> 
+      
+
+    </div>

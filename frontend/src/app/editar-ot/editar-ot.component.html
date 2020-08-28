@@ -1,0 +1,354 @@
+<div class="container">
+    <h1>Generar orden de trabajo</h1>
+    <form (ngSubmit)="saveOrden()" #formulario="ngForm">
+
+      <div class="row col-md-6">
+        <div class="form-group">      
+          <label for="nom_empresa">NOMBRE DE LA EMPRESA</label>
+          <input editable [(ngModel)]="orden.nom_empresa" type="text" class="form-control" id="nom_empresa" placeholder="Nombre de la empresa"     
+          required maxlength="45" name="nom_empresa" #nom_empresa="ngModel" pattern="^[a-zA-Z ]*$" >      
+          <div *ngIf="nom_empresa.errors?.required && (nom_empresa.touched||nom_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div> 
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">      
+            <label for="ubicacion_tecnica_empresa">UBICACIÓN TÉCNICA EN LA EMPRESA</label>
+            <input editable [(ngModel)]="orden.ubicacion_tecnica_empresa" type="text" class="form-control" id="ubicacion_tecnica_empresa" placeholder="Ubicación técnica en la empresa"     
+            required maxlength="50" name="ubicacion_tecnica_empresa" #ubicacion_tecnica_empresa="ngModel" pattern="^[a-zA-Z ]*$" >      
+            <div *ngIf="ubicacion_tecnica_empresa.errors?.required && (ubicacion_tecnica_empresa.touched||ubicacion_tecnica_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div> 
+            
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="id">ID</label>
+            <input editable [(ngModel)]="orden.id" type="text" class="form-control" id="id" [value]="ultimo_id" 
+            #id ="ngModel" name="id" readonly>
+          </div>
+        </div>
+      </div>
+
+      
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="fecha">FECHA CREACION</label>
+            <input [(ngModel)]="orden.fecha" type="date" class="form-control" id="fecha"     
+            required minlength="10" name="fecha" #fecha="ngModel" >
+            <div *ngIf="fecha.errors?.required && (fecha.touched||fecha.dirty)" class="alert alert-danger">El campo es obligatorio</div>           
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="fecha_inicio">FECHA INICIO</label>
+            <input [(ngModel)]="orden.fecha_inicio" type="date" class="form-control" id="fecha_inicio"
+            required minlength="10" name="fecha_inicio" #fecha_inicio="ngModel" >
+            <div *ngIf="fecha.errors?.required && (fecha_inicio.touched||fecha_inicio.dirty)" class="alert alert-danger">El campo es obligatorio</div>           
+          </div>
+        </div>        
+      </div>
+
+      <div class="form-group col-md-6">
+          <label for="nom_supervisor_empresa" >COORDINAR CON</label>
+          <input [(ngModel)]="orden.nom_supervisor_empresa" type="text" class="form-control" id="nom_supervisor_empresa" placeholder="Ingrese nombre del supervisor"
+          required name="nom_supervisor_empresa" #nom_supervisor_empresa="ngModel" pattern="^[a-zA-Z. ]*$">      
+          <div *ngIf="nom_supervisor_empresa.errors?.required && (nom_supervisor_empresa.touched||nom_supervisor_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div>              
+          <div *ngIf="nom_supervisor_empresa.errors?.pattern && (nom_supervisor_empresa.touched||nom_supervisor_empresa.dirty)" class="alert alert-danger">Solo letras</div>              
+      </div>
+
+      
+      <div class="card">
+        <div class="card-header">
+          EQUIPO SOLICITANTE DE MANTENIMIENTO
+        </div>
+        <div class="card-body">
+          <div class="row">         
+            <div class="col-md-6">
+              <div class="form-group">      
+                <label for="equipo_empresa">NOMBRE DEL EQUIPO</label>
+                <input editable [(ngModel)]="orden.equipo_empresa" type="text" class="form-control" id="equipo_empresa" placeholder="Nombre del equipo"     
+                required maxlength="60" name="equipo_empresa" #equipo_empresa="ngModel" pattern="^[a-zA-Z ]*$" >      
+                <div *ngIf="equipo_empresa.errors?.required && (equipo_empresa.touched||equipo_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div> 
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="form-group">      
+                <label for="num_inventario_empresa">NUMERO DE INVENTARIO</label>
+                <input editable [(ngModel)]="orden.num_inventario_empresa" type="text" class="form-control" id="num_inventario_empresa" placeholder="Numero de inventario del equipo"     
+                required maxlength="15" name="num_inventario_empresa" #num_inventario_empresa="ngModel" pattern="^[a-zA-Z ]*$" >      
+                <div *ngIf="num_inventario_empresa.errors?.required && (num_inventario_empresa.touched||num_inventario_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div> 
+              </div>
+            </div>
+          </div>
+          <div class="row">         
+            <div class="col-md-6">
+              <div class="form-group">      
+                <label for="tipo_empresa">TIPO </label>
+                <input editable [(ngModel)]="orden.tipo_empresa" type="text" class="form-control" id="tipo_empresa" placeholder="Tipo del equipo"     
+                required maxlength="60" name="tipo_empresa" #tipo_empresa="ngModel" pattern="^[a-zA-Z ]*$" >      
+                <div *ngIf="tipo_empresa.errors?.required && (tipo_empresa.touched||tipo_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div> 
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="form-group">      
+                <label for="serie_empresa">SERIE</label>
+                <input editable [(ngModel)]="orden.serie_empresa" type="text" class="form-control" id="serie_empresa" placeholder="Serie del equipo"     
+                required maxlength="15" name="serie_empresa" #serie_empresa="ngModel" pattern="^[a-zA-Z ]*$" >      
+                <div *ngIf="serie_empresa.errors?.required && (serie_empresa.touched||serie_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div> 
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group ">
+                <label for="marca" >MARCA</label>
+                <input [(ngModel)]="orden.marca_empresa" type="textt" class="form-control" id="marca_empresa" placeholder="Ingrese la marca del equipo"
+                required maxlength="45" name="marca_empresa" #marca_empresa="ngModel" >      
+                <div *ngIf="marca_empresa.errors?.required && (marca_empresa.touched||marca_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div>              
+                
+            </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group ">
+                <label for="modelo_empresa" >MODELO</label>
+                <input [(ngModel)]="orden.modelo_empresa" type="textt" class="form-control" id="modelo_empresa" placeholder="Ingrese el modelo del equipo"
+                required maxlength="15" name="modelo_empresa" #modelo_empresa="ngModel" >      
+                <div *ngIf="modelo_empresa.errors?.required && (modelo_empresa.touched||modelo_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div>                            
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group ">
+                <label for="procedencia_empresa" >PROCEDENCIA</label>
+                <input [(ngModel)]="orden.procedencia_empresa" type="textt" class="form-control" id="procedencia_empresa" placeholder="Ingrese la procedencia del equipo"
+                required maxlength="45" name="procedencia_empresa" #procedencia_empresa="ngModel" >      
+                <div *ngIf="procedencia_empresa.errors?.required && (procedencia_empresa.touched||procedencia_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div>                            
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="procedencia_ano_empresa">AÑO DE PRECEDENCIA</label>
+                <input [(ngModel)]="orden.procedencia_ano_empresa" type="date" class="form-control" id="procedencia_ano_empresa"
+                required name="procedencia_ano_empresa" #procedencia_ano_empresa="ngModel" >
+                <div *ngIf="procedencia_ano_empresa.errors?.required && (procedencia_ano_empresa.touched||procedencia_ano_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div>           
+                
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">              
+              <div class="form-group ">
+                <label for="instalado_por_empresa" >INSTALADO POR</label>
+                <input [(ngModel)]="orden.instalado_por_empresa" type="textt" class="form-control" id="instalado_por_empresa" placeholder="Ingrese la empresa que instalo"
+                required maxlength="80" name="instalado_por_empresa" #instalado_por_empresa="ngModel" >      
+                <div *ngIf="instalado_por_empresa.errors?.required && (instalado_por_empresa.touched||instalado_por_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div>                            
+              </div>              
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="instalado_por_ano_empresa">AÑO DE INSTALACIÓN</label>
+                <input [(ngModel)]="orden.instalado_por_ano_empresa" type="date" class="form-control" id="instalado_por_ano_empresa"
+                required name="instalado_por_ano_empresa" #instalado_por_ano_empresa="ngModel" >
+                <div *ngIf="instalado_por_ano_empresa.errors?.required && (instalado_por_ano_empresa.touched||instalado_por_ano_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div>           
+                
+              </div>
+            </div>
+          </div>
+          <div class="row col-md">
+            <div class="form-group ">
+              <label for="funcion_empresa" >FUNCIONES</label>
+              <input [(ngModel)]="orden.funcion_empresa" type="textt" class="form-control" id="funcion_empresa" placeholder="Ingrese la función en la empresa"
+              required maxlength="45" name="funcion_empresa" #funcion_empresa="ngModel" >      
+              <div *ngIf="funcion_empresa.errors?.required && (funcion_empresa.touched||funcion_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div>                            
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group ">
+        <label for="descripcion" >DESCRIPCIÓN DE TAREAS</label>
+        <input [(ngModel)]="orden.descripcion" type="textt" class="form-control" id="descripcion" placeholder="Ingrese descripción"
+        required maxlength="255" name="descripcion" #descripcion="ngModel" >      
+        <div *ngIf="descripcion.errors?.required && (descripcion.touched||descripcion.dirty)" class="alert alert-danger">El campo es obligatorio</div>                        
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h5>Generar grupo de trabajo</h5>
+          <div class="form-group">
+            <label for="personal_id" >RR.HH.</label>
+            <select name="personal_id" [(ngModel)]="rrhh" class="form-control"   id="personal_id" #personal_id="ngModel" required>
+              <option [ngValue]="itemh" *ngFor="let itemh of rrhhs">ID:{{itemh.id}} - {{itemh.nombre}} {{itemh.ap_paterno}} {{itemh.ap_materno}}</option>
+              </select>         
+            <div *ngIf="personal_id.errors?.required && (personal_id.touched||personal_id.dirty)" class="alert alert-danger">El campo es obligatorio</div>         
+          </div>
+          <div class="row">
+            <div class="col-sm-4"><button type="button" class="btn btn-success" (click)="agregarRrhh()" >Añadir al grupo de trabajo</button></div>
+            <div class="col-sm-4" align="right"><button type="button" class="btn btn-danger" (click)="deleteRrhh()" >Eliminar</button>        </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div *ngIf = lista.length>
+            <h4>Grupo de trabajo</h4>
+          <table class="table ">
+            <thead class="table table-hover">
+              <tr>
+                <th scope="col">ID O.T.</th>
+                <th scope="col">ID RR.HH.</th>
+                <th scope="col">NOMBRE(S)</th>
+                <th scope="col">AP. PATERNO</th>
+                <th scope="col">AP. MATERNO</th>                                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let grupo of lista" >
+                <td>{{grupo.orden_trabajo_id}}</td>
+                <td>{{grupo.personal_id}}</td>
+                <td>{{grupo.nombre}}</td>               
+                <td>{{grupo.ap_paterno}}</td>
+                <td>{{grupo.ap_materno}}</td>                   
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">DETALLE DE MATERIALES</div>
+        
+        
+
+        <form (ngSubmit) = "anadirHerramienta()" #formH = "ngForm">
+          <div class="row container">          
+            <div class="col-sm-4">
+              <div class="form-group ">
+                <label for="herramienta">HERRAMIENTA</label>
+                <select name="herramienta" [(ngModel)]="herramienta" class="form-control"   id="herramienta" #herramienta_s="ngModel" required>
+                <option [ngValue]="itemh" *ngFor="let itemh of herramientas">{{itemh.id}} - {{itemh.nombre}}</option>
+                </select> 
+                <div *ngIf="herramienta_s.errors?.required && (herramienta_s.touched||herramienta_s.dirty)" class="alert alert-danger">El campo es obligatorio</div>                                      
+              </div>
+            </div>
+  
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="cantidad_h" edit= "false">CANTIDAD </label>
+                <input [(ngModel)]="cantidad_herramienta" type="number" class="form-control" id="cantidad_h" placeholder="Ingrese cantidad"
+                required  name="cantidad_h" #cantidad_h="ngModel" digits>      
+                <div *ngIf="cantidad_h.errors?.required && (cantidad_h.touched||cantidad_h.dirty)" class="alert alert-danger">El campo es obligatorio</div>    
+                <div *ngIf="cantidad_h.errors?.digits && (cantidad_h.touched||cantidad_h.dirty)" class="alert alert-danger">Ingrese solo enteros</div>   
+              </div>
+            </div>
+            <button type="submit" class="btn btn-link" [disabled]="!formH.form.valid">Añadir herramienta</button>
+          </div>
+          
+        </form>
+  
+                          
+        <form (ngSubmit)="anadirInsumo()" #formI = "ngForm">
+
+          <div class="row container">            
+            <div class="col-sm-4">
+              <div class="form-group ">
+                <label for="insumo">INSUMO</label>
+                <select name="insumo" [(ngModel)]="insumo" class="form-control"   id="insumo" #insumo_s="ngModel" required>
+                <option [ngValue]="itemi" *ngFor="let itemi of insumos">{{itemi.id}} - {{itemi.nombre}}</option>
+                </select>   
+                <div *ngIf="insumo_s.errors?.required && (insumo_s.touched||insumo_s.dirty)" class="alert alert-danger">El campo es obligatorio</div>                           
+              </div>
+            </div>    
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="cantidad" edit= "false">CANTIDAD </label>
+                <input [(ngModel)]="cantidad_insumo" type="number" class="form-control" id="cantidad" placeholder="Ingrese cantidad"
+                required  name="cantidad" #cantidad="ngModel" digits>      
+                <div *ngIf="cantidad.errors?.required && (cantidad.touched||cantidad.dirty)" class="alert alert-danger">El campo es obligatorio</div>    
+                <div *ngIf="cantidad.errors?.digits && (cantidad.touched||cantidad.dirty)" class="alert alert-danger">Ingrese solo enteros</div>   
+              </div>
+            </div>            
+            <button type="submit" class="btn btn-link" [disabled]="!formI.form.valid">Añadir insumo</button>
+          </div>
+          
+            <div class="col-sm-10" align="right"><button type="button" class="btn btn-danger" (click)="deleteMaterial()" >Eliminar</button>        </div>
+          <p></p>
+        </form>
+        <div class="containder" *ngIf = "detalleCompleto.length">
+          <table class="table ">
+            <thead class="table table-hover">
+              <tr>
+                <th scope="col">ID </th>
+                <th scope="col">ID I.</th>
+                <th scope="col">ID H.</th>
+                <th scope="col">NOMBRE I.</th>
+                <th scope="col">NOMBRE H.</th>
+                <th scope="col">CANT.</th>
+                <th scope="col">PRECIO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor = "let itemd of detalleCompleto">
+                <th>{{ultimo_id}}</th>
+                <td>{{itemd.insumo_id}}</td>
+                <td>{{itemd.herramienta_id}}</td>               
+                <td>{{itemd.insumo_nombre}}</td>          
+                <td>{{itemd.herramienta_nombre}}</td>          
+                <td>{{itemd.cantidad}}</td>          
+                <td>{{itemd.precio}}</td>           
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h5>Equipos</h5>
+          <div class="form-group">
+            <label for="equipo_id" >Equipo</label>
+            <select name="equipo_id" [(ngModel)]="equipo" class="form-control"   id="equipo_id" #equipo_id="ngModel" required>
+              <option [ngValue]="iteme" *ngFor="let iteme of equipos">ID:{{iteme.id}} - {{iteme.nombre}} </option>
+              </select>         
+            <div *ngIf="personal_id.errors?.required && (personal_id.touched||personal_id.dirty)" class="alert alert-danger">El campo es obligatorio</div>         
+          </div>
+          <div class="row">
+            <div class="col-sm-4"><button type="button" class="btn btn-success" (click)="anadirEquipo()" >Añadir equipo</button></div>
+            <div class="col-sm-4" align="right"><button type="button" class="btn btn-danger" (click)="deleteEquipo()" >Eliminar</button>        </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div *ngIf = lista_equipo.length>
+            <h4>Grupo de trabajo</h4>
+          <table class="table ">
+            <thead class="table table-hover">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">NOMBRE</th>
+                <th scope="col">SERIE</th>
+                <th scope="col">MODELO</th>
+                <th scope="col">UBICACIÓN TÉCNICA</th>                                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let grupo of lista_equipo" >
+                <td>{{grupo.id}}</td>
+                <td>{{grupo.nombre}}</td>
+                <td>{{grupo.serie}}</td>               
+                <td>{{grupo.modelo}}</td>
+                <td>{{grupo.ubicacion_tecnica}}</td>                   
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!formulario.form.valid">Guardar</button>
+      <button type="button" class="btn btn-primary" [disabled]="!formulario.form.valid">Descargar</button>
+      <button type="button" class="btn btn-secondary" [disabled]="!formulario.form.valid">Imprimir</button>
+      </form> 
+    </div>

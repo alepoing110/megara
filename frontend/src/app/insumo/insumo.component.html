@@ -1,0 +1,26 @@
+<h1>Insumos</h1>
+  <table class="table ">
+    <thead class="table table-hover">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Editar insumo</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let insumo of insumos" >
+        <th>{{insumo.id}}</th>
+        <td>{{insumo.nombre}}</td>
+        <td>{{insumo.cantidad}}</td>
+        <td>{{insumo.precio}}</td>        
+        <td>
+            <a class="btn btn-primary btn-sm" routerLink="/editar/insumo/{{insumo.id}}">Ver/Editar</a>   
+            <a class="btn btn-ligth btn-sm" routerLink="/editar/insumo-anadir/{{insumo.id}}">Añadir</a>   
+            <a class="btn btn-primary btn-sm btn-danger" (click)="delete(insumo.id)">Eliminar</a>    
+        </tr>     
+    </tbody>
+  </table>
+

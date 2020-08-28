@@ -1,0 +1,99 @@
+<div class="container">
+    <h1>Crear Usuario</h1>
+    <form (ngSubmit)="saveUsuario()" #editarUsuario="ngForm">
+      <div class="form-group">
+        <label class="col-form-label"for="ci">CI: </label>
+        <input  type="text" class="form-control col-2" id="ci" placeholder="Ingrese CI" [(ngModel)]="usuario.ci"
+        #ci="ngModel" required minlength="7" maxlength="7" name="ci" [rangeLength]="[7, 7]" digits >   
+        <div *ngIf="ci.errors?.digits && (ci.dirty||ci.touched)" class="alert alert-danger">Ingresar solo numeros</div>
+        <div *ngIf="ci.errors?.rangeLength && (ci.dirty||ci.touched)" class="alert alert-danger">Debe de ingresar 7 digitos</div>
+        <div *ngIf="ci.errors?.required && (ci.dirty||ci.touched)" class="alert alert-danger">El campo es obligatorio</div>
+      </div> 
+      <div class="from-group">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+              <label for="nombre">NOMBRES:</label>
+              <input [(ngModel)]="usuario.nombre" type="text" class="form-control" id="nombre" placeholder="Ingrese nombres"
+              required maxlength="20" name="nombre" #nombre="ngModel" pattern="^[a-zA-Z. ]*$" >      
+              <div *ngIf="nombre.errors?.pattern && (nombre.dirty||nombre.touched)" class="alert alert-danger">Ingrese solo letras</div>
+              <div *ngIf="nombre.errors?.required && (nombre.dirty||nombre.touched)" class="alert alert-danger">El campo es obligatorio</div>
+   
+              
+            </div>
+            <div class="col-sm">
+              <label for="ap_paterno">APELLIDO PATERNO:</label>
+              <input [(ngModel)]="usuario.ap_paterno" type="text" class="form-control" id="ap_paterno" placeholder="Ingrese apellido paterno" 
+              required maxlength="20" name="ap_paterno" #ap_paterno="ngModel" pattern="^[a-zA-Z. ]*$">      
+              <div *ngIf="ap_paterno.errors?.pattern && (ap_paterno.touched||ap_paterno.dirty)" class="alert alert-danger">Ingrese solo letras</div>        
+              <div *ngIf="ap_paterno.errors?.required && (ap_paterno.touched||ap_paterno.dirty)" class="alert alert-danger">El campo paterno es obligatorio</div>            
+            </div>
+            <div class="col-sm">
+              <label for="ap_materno">APELLIDO MATERNO:</label>
+              <input [(ngModel)]="usuario.ap_materno" type="text" class="form-control" id="ap_materno" placeholder="Ingrese apellido materno"
+              required maxlength="20" name="ap_materno" #ap_materno="ngModel" pattern="^[a-zA-Z. ]*$">      
+              <div *ngIf="ap_materno.errors?.pattern && (ap_materno.touched||ap_materno.dirty)" class="alert alert-danger">Ingrese solo letras</div>   
+              <div *ngIf="ap_materno.errors?.required && (ap_materno.touched||ap_materno.dirty)" class="alert alert-danger">El campo materno es obligatorio</div>            
+            </div>    
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <label class="col-form-label" for="nick">CUENTA DE USUARIO: </label>
+              <input [(ngModel)]="usuario.nick" type="text" class="form-control" id="nick" placeholder="Ingrese nombre de usuario"
+              required maxlength="12" name="nick" #nick="ngModel" pattern="^[a-zA-Z ]*$">      
+              <div *ngIf="nick.errors?.pattern && (nick.touched||nick.dirty)" class="alert alert-danger">Ingrese solo letras</div>      
+              <div *ngIf="nick.errors?.required && (nick.touched||nick.dirty)" class="alert alert-danger">El campo es obligatorio</div>
+            </div>      
+            <div class="col">
+              <label class="col-form-label" for="password" >PASSWORD </label>
+              <input [(ngModel)]="usuario.password" type="password" class="form-control" id="password" placeholder="Ingrese password"
+              required maxlength="25" name="password" #password="ngModel">  
+              <div *ngIf="password.errors?.required && password.touched" class="alert alert-danger">El campo es obligatorio</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group ">
+        <label for="telefono" >TELEFONO</label>
+        <input [(ngModel)]="usuario.telefono" type="text" class="form-control" id="telefono" placeholder="Ingrese teléfono"
+        required maxlength="8" name="telefono" #telefono="ngModel" [rangeLength]="[8, 8]" number  >               
+        <div *ngIf="telefono.errors?.required && (telefono.touched||telefono.dirty)" class="alert alert-danger">El campo es obligatorio</div>
+        <div *ngIf="telefono.errors?.rangeLength && (telefono.touched||telefono.dirty)" class="alert alert-danger">Ingrese 8 números</div>
+        <div *ngIf="telefono.errors?.number && (telefono.touched||telefono.dirty)" class="alert alert-danger">Ingrese solo números</div>
+      </div>
+      <div class="form-group ">
+        <label for="direccion" >DIRECCION</label>
+        <input [(ngModel)]="usuario.direccion" type="text" class="form-control col-sm" id="direccion" placeholder="Ingrese dirección"
+        required maxlength="125" name="direccion" #direccion="ngModel" pattern="^[a-zA-Z.# ]*$">
+        <div *ngIf="direccion.errors?.required && (direccion.touched||direccion.dirty)" class="alert alert-danger">El campo es obligatorio</div>      
+        <div *ngIf="direccion.errors?.pattern && (direccion.dirty||direccion.touched)" class="alert alert-danger">Ingrese solo letras</div>
+      </div>
+      <div class="form-group">
+        <div class="container">
+          <div class="row">
+            
+            <div class="col-5">
+              <label for="fecha" >FECHA DE NACIMIENTO</label>
+              <input [(ngModel)]="usuario.fecha_nac" type="date" class="form-control" id="fecha" placeholder="YYYY/MM/DD"
+              required maxlength="10" name="fecha" #fecha="ngModel">               
+              <div *ngIf="fecha.errors?.required && (fecha.touched||fecha.dirty)" class="alert alert-danger">El campo es obligatorio</div>
+              <div *ngIf="fecha.errors?.maxlength && (fecha.touched||fecha.dirty)" class="alert alert-danger">Maximo 10 caracteres</div>             
+              {{usuario.fecha_nac}}
+            </div>
+            <div class="col-5">
+              <label for="rol">ROL</label>
+              <select name="rol" [(ngModel)]="usuario.rol" class="form-control"   id="rol" #rol="ngModel" required>
+              <option [ngValue]="item.cod" *ngFor="let item of roles">{{item?.cod}} {{item?.nombre}}</option>
+              </select>
+            </div>         
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="!editarUsuario.form.valid">Guardar</button>
+    </form>
+  </div>
+  

@@ -1,0 +1,57 @@
+<div class="container">
+  <h1>Crear Equipo</h1>
+  <form (ngSubmit)="saveEquipo()" #formulario="ngForm">
+
+    <div class="form-group">
+        <label for="nombre">NOMBRE</label>
+        <input [(ngModel)]="equipo.nombre" type="text" class="form-control col-8" id="nombre" placeholder="Ingrese nombre"
+        required maxlength="80" name="nombre" #nombre="ngModel" pattern="^[a-zA-Z.-/|_]*$">      
+      <div *ngIf="nombre.errors?.required && nombre.touched" class="alert alert-danger">El campo es obligatorio</div>      
+      <div *ngIf="nombre.errors?.pattern && (nombre.dirty||nombre.touched)" class="alert alert-danger">Ingrese solo letras</div>
+      </div>
+    <div class="form-group">
+      <label for="serie" edit= "false">SERIE</label>
+      <input [(ngModel)]="equipo.serie" type="text" class="form-control" id="serie" placeholder="Ingrese serio"
+      required maxlength="45" name="serie" #serie="ngModel">      
+      <div *ngIf="serie.errors?.required && serie.touched" class="alert alert-danger">El campo es obligatorio</div>  
+    </div>    
+
+    <div class="form-group ">
+        <label for="modelo" >MODELO</label>
+        <input [(ngModel)]="equipo.modelo" type="textt" class="form-control" id="modelo" placeholder="Ingrese modelo"
+        required maxlength="45" name="modelo" #modelo="ngModel">      
+      <div *ngIf="modelo.errors?.required && modelo.touched" class="alert alert-danger">El campo es obligatorio</div>             
+    </div>
+    <div class="form-group ">
+        <label for="marca" >MARCA</label>
+        <input [(ngModel)]="equipo.marca" type="text" class="form-control" id="marca" placeholder="Ingrese marca"
+        required maxlength="45" name="marca" #marca="ngModel">      
+      <div *ngIf="marca.errors?.required && marca.touched" class="alert alert-danger">El campo es obligatorio</div>             
+    </div>
+    <div class="form-group ">
+      <label for="fabricante" >FABRICANTE</label>
+      <input [(ngModel)]="equipo.fabricante" type="text" class="form-control" id="fabricante" placeholder="Ingrese fabricante"
+      required maxlength="45" name="fabricante" #fabricante="ngModel">      
+      <div *ngIf="fabricante.errors?.required && fabricante.touched" class="alert alert-danger">El campo es obligatorio</div>             
+    </div>
+    <div class="form-group ">
+      <label for="ubicacion_tecnica" >UBICACION TECNICA</label>
+      <input [(ngModel)]="equipo.ubicacion_tecnica" type="text" class="form-control" id="ubicacion_tecnica" placeholder="Ingrese ubicacón técnica"
+      required maxlength="80" name="ubicacion_tecnica" #ubicacion_tecnica="ngModel">      
+      <div *ngIf="ubicacion_tecnica.errors?.required && ubicacion_tecnica.touched" class="alert alert-danger">El campo es obligatorio</div>               
+    </div>
+    <div class="form-group ">
+      <label for="descripcion" >DESCRIPCION</label>
+      <input [(ngModel)]="equipo.descripcion" type="text" class="form-control" id="descripcion" placeholder="Ingrese descripción"
+      required maxlength="120" name="descripcion" #descripcion="ngModel">      
+      <div *ngIf="descripcion.errors?.required && descripcion.touched" class="alert alert-danger">El campo es obligatorio</div>                  
+    </div>
+    <div class="form-group ">
+      <label for="observaciones" >OBSERVACIONES</label>
+      <textarea [(ngModel)]="equipo.observaciones" type="textArea" class="form-control" id="observaciones" placeholder="Ingrese descripcion"
+       maxlength="45" name="observaciones" #observaciones="ngModel"> </textarea>     
+      
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!formulario.form.valid">Guardar</button>
+  </form>
+  </div>

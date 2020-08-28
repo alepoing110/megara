@@ -1,0 +1,30 @@
+<div>
+  <h1>Usuarios</h1>
+</div>
+<div>
+  <table class="table ">
+    <thead class="table table-hover">
+      <tr>
+        <th scope="col">CI</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Paterno</th>
+        <th scope="col">Materno</th>
+        <th scope="col">Direccion</th>
+        <th scope="col">Editar usuario</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios" >
+        <th>{{usuario.ci}}</th>
+        <td>{{usuario.nombre}}</td>
+        <td>{{usuario.ap_paterno}}</td>
+        <td>{{usuario.ap_materno}}</td>
+        <td>{{usuario.direccion}}</td>
+        <td>
+            <a class="btn btn-primary btn-sm" routerLink="/editar/usuario/{{usuario.ci}}">Ver/Editar</a>
+            <a class="btn btn-primary btn-sm btn-danger" (click)="delete(usuario.ci)">Eliminar</a>    
+        </tr>     
+    </tbody>
+  </table>
+</div>

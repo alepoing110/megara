@@ -1,0 +1,31 @@
+<div>
+    <h1>RRHH</h1>
+  </div>
+    
+    <table class="table ">
+          <thead class="table table-hover">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellido Paterno</th>
+              <th scope="col">Apellido Materno</th>
+              <th scope="col">Especialidad</th>
+              <th scope="col">Editar proveedor</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rrhh of rrhhs" >
+              <th>{{rrhh.id}}</th>
+              <td>{{rrhh.nombre}}</td>
+              <td>{{rrhh.ap_paterno}}</td>
+              <td>{{rrhh.ap_materno}}</td>
+              <td>{{rrhh.especialidad}}</td>
+              <td>
+                  <a class="btn btn-primary btn-sm" routerLink="/editar/rrhh/{{rrhh.id}}">Ver/Editar</a>   
+                  <a class="btn btn-primary btn-sm btn-danger" (click)="delete(rrhh.id)">Eliminar</a>    
+              </tr>     
+          </tbody>
+        </table>
+      
+  

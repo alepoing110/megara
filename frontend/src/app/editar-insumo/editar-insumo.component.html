@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Crear Insumo</h1>
+  <h2>ID: {{insumo.id}}</h2>
+  <form (ngSubmit)="saveInsumo()" #formulario="ngForm">
+    <div class="form-group">
+        <label for="nombre">NOMBRE</label>
+        <input [(ngModel)]="insumo.nombre" type="text" class="form-control" id="nombre" placeholder="Ingrese nombre"
+        required maxlength="45" name="nombre" #nombre="ngModel" pattern="^[a-zA-Z ]*$">      
+        <div *ngIf="nombre.errors?.required && (nombre.touched||nombre.dirty)" class="alert alert-danger">El campo es obligatorio</div>
+        <div *ngIf="nombre.errors?.pattern && (nombre.touched||nombre.dirty)" class="alert alert-danger">Ingrese solo letras</div>
+
+      </div>
+    <div class="form-group">
+      <label for="cantidad" edit= "false">CANTIDAD</label>
+      <input [(ngModel)]="insumo.cantidad" type="text" class="form-control" id="cantidad" placeholder="Ingrese cantidad"
+      required  name="cantidad" #cantidad="ngModel" digits>      
+        <div *ngIf="cantidad.errors?.required && (cantidad.touched||cantidad.dirty)" class="alert alert-danger">El campo es obligatorio</div>    
+        <div *ngIf="cantidad.errors?.digits && (cantidad.touched||cantidad.dirty)" class="alert alert-danger">Ingrese solo enteros</div>    
+        
+    </div>
+    
+    <div class="form-group ">
+        <label for="precio" >PRECIO</label>
+        <input [(ngModel)]="insumo.precio" type="text" step='0.1' value='5.00'class="form-control" id="precio" placeholder="Ingrese precio"
+        required name="precio" #precio="ngModel" number>      
+        <div *ngIf="precio.errors?.required && (precio.touched||precio.dirty)" class="alert alert-danger">El campo es obligatorio</div>              
+        <div *ngIf="precio.errors?.number && (precio.touched||precio.dirty)" class="alert alert-danger">Ingrese solo numeros</div>              
+    </div>
+   
+    <button type="submit" class="btn btn-success" [disabled]="!formulario.form.valid">Guardar</button>
+    </form>
+  </div>

@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>Crear Herramienta</h1>
+  <form (ngSubmit)="saveHerramienta()" #formulario="ngForm">
+    <div class="form-group">
+        <label for="nombre">NOMBRE</label>
+        <input [(ngModel)]="herramienta.nombre" type="text" class="form-control" id="nombre" placeholder="Ingrese nombre"     
+        required maxlength="45" name="nombre" #nombre="ngModel" pattern="^[a-zA-Z ]*$">
+        <div *ngIf="nombre.errors?.required && (nombre.touched||nombre.dirty)" class="alert alert-danger">El campo es obligatorio</div> 
+        <div *ngIf="nombre.errors?.pattern && (nombre.touched||nombre.dirty)" class="alert alert-danger">Solo letras</div> 
+      </div>
+  
+    <div class="form-group ">
+        <label for="tipo" >TIPO</label>
+        <input [(ngModel)]="herramienta.tipo" type="text" class="form-control" id="tipo" placeholder="Ingrese tipo"
+        required maxlength="45" name="tipo" #tipo="ngModel" pattern="^[a-zA-Z ]*$">      
+        <div *ngIf="tipo.errors?.required && (tipo.touched||tipo.dirty)" class="alert alert-danger">El campo es obligatorio</div>              
+        <div *ngIf="tipo.errors?.pattern && (tipo.touched||tipo.dirty)" class="alert alert-danger">Solo letras</div>              
+    </div>
+
+    <div class="form-group ">
+        <label for="cantidad" >CANTIDAD</label>
+        <input [(ngModel)]="herramienta.cantidad" type="text" class="form-control" id="cantidad" placeholder="Ingrese cantidad"
+        required maxlength="5" name="cantidad" #cantidad="ngModel" digits>      
+        <div *ngIf="cantidad.errors?.required && (cantidad.touched||cantidad.dirty)" class="alert alert-danger">El campo es obligatorio</div>              
+        <div *ngIf="cantidad.errors?.digits && (cantidad.touched||cantidad.dirty)" class="alert alert-danger">Ingrese solo numeros enteros</div>              
+    </div>
+    <div class="form-group ">
+        <label for="precio" >PRECIO</label>
+        <input [(ngModel)]="herramienta.precio" type="text" step='0.1' value='5.00'class="form-control" id="precio" placeholder="Ingrese precio"
+        required name="precio" #precio="ngModel" number>      
+        <div *ngIf="precio.errors?.required && (precio.touched||precio.dirty)" class="alert alert-danger">El campo es obligatorio</div>              
+        <div *ngIf="precio.errors?.number && (precio.touched||precio.dirty)" class="alert alert-danger">Ingrese solo numeros</div>
+      </div>
+    <button type="submit" class="btn btn-success" [disabled]="!formulario.form.valid">Guardar</button>
+    </form> 
+  </div>

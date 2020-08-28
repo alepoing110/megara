@@ -1,0 +1,39 @@
+<div class="container">
+  <h1>Crear Proveedor</h1>
+  <h2>ID: {{proveedor.id}}</h2>
+  <form (ngSubmit)="saveProveedor()" #formulario="ngForm">
+  <div class="form-group">
+      <label for="nombre">NOMBRE PROVEEDOR</label>
+      <input [(ngModel)]="proveedor.nombre" type="text" class="form-control" id="nombre" placeholder="Ingrese nombres"
+      required maxlength="45" name="nombre" #nombre="ngModel" pattern="^[a-zA-Z ]*$">      
+      <div *ngIf="nombre.errors?.required && (nombre.touched||nombre.dirty)" class="alert alert-danger">El campo es obligatorio</div>
+      <div *ngIf="nombre.errors?.pattern &&  (nombre.touched||nombre.dirty)" class="alert alert-danger">Solo ingrese letras</div>     
+    </div>
+  <div class="form-group">
+    <label for="nom_encargado" edit= "false">NOMBRE ENCARGADO</label>
+    <input [(ngModel)]="proveedor.nom_encargado" type="text" class="form-control" id="nom_encargado" placeholder="Ingrese nombre encargados"
+    required maxlength="100" name="nom_encargado" #nom_encargado="ngModel" pattern="^[a-zA-Z. ]*$">      
+            <div *ngIf="nom_encargado.errors?.required && (nom_encargado.touched||nom_encargado.dirty)" class="alert alert-danger">El campo es obligatorio</div>
+            <div *ngIf="nom_encargado.errors?.pattern &&  (nom_encargado.touched||nom_encargado.dirty)" class="alert alert-danger">Solo ingrese letras</div>     
+  </div>
+  
+  <div class="form-group ">
+      <label for="telefono" >TELEFONO</label>
+      <input [(ngModel)]="proveedor.telefono" type="text" class="form-control" id="telefono" placeholder="Ingrese teléfono"
+      required minlength="8" maxlength="10"  name="number" #telefono="ngModel" number [rangeLength]="[8, 10]">      
+      <div *ngIf="telefono.errors?.required && (telefono.touched||telefono.dirty)" class="alert alert-danger">El campo es obligatorio</div>
+      <div *ngIf="telefono.errors?.rangeLength && (telefono.touched||telefono.dirty)" class="alert alert-danger">Entre 8-10 digitos</div>            
+      <div *ngIf="telefono.errors?.number && (telefono.touched||telefono.dirty)" class="alert alert-danger">Solo numeros</div>            
+                 
+  </div>
+  <div class="form-group ">
+      <label for="direccion" >DIRECCION</label>
+      <input [(ngModel)]="proveedor.direccion" type="text" class="form-control" id="direccion" placeholder="Ingrese dirección"
+      required  maxlength="100" name="direccion" #direccion="ngModel"  pattern="^[a-zA-Z.# ]*$">      
+            <div *ngIf="direccion.errors?.required && (direccion.touched||direccion.dirty)" class="alert alert-danger">El campo es obligatorio</div>            
+            <div *ngIf="direccion.errors?.pattern && (direccion.touched||direccion.dirty)" class="alert alert-danger">Ingrese solo letras</div>            
+            
+  </div>
+  <button type="submit" class="btn btn-success" [disabled]="!formulario.form.valid">Guardar</button>
+  </form>
+</div>

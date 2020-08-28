@@ -1,0 +1,30 @@
+<div>
+  <h1>Proveedores</h1>
+</div>
+  
+  <table class="table ">
+        <thead class="table table-hover">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Encargado</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Editar proveedor</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let proveedor of proveedores" >
+            <th>{{proveedor.id}}</th>
+            <td>{{proveedor.nombre}}</td>
+            <td>{{proveedor.nom_encargado}}</td>
+            <td>{{proveedor.direccion}}</td>
+            <td>{{proveedor.telefono}}</td>
+            <td>
+                <a class="btn btn-primary btn-sm" routerLink="/editar/proveedor/{{proveedor.id}}">Ver/Editar</a>   
+                <a class="btn btn-primary btn-sm btn-danger" (click)="delete(proveedor.id)">Eliminar</a>    
+            </tr>     
+        </tbody>
+      </table>
+    

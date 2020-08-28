@@ -1,0 +1,26 @@
+<h1>Historial de mantenimiento</h1>
+  <table class="table ">
+    <thead class="table table-hoverk">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">ID OT</th>
+        <th scope="col">Fecha de culminacion</th>
+        <th scope="col">Tiempo de mantenimiento</th>
+        <th scope="col">Encargado</th>
+        <th scope="col"></th>        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ficha of fichas" >
+        <th>{{ficha.id}}</th>
+        <td>{{ficha.orden_trabajo_id}}</td>
+        <td>{{ficha.fecha_culminacion}}</td>      
+        <td>{{ficha.tiempo_mantenimiento}}</td>
+        <td>{{ficha.recurso_humano_id}}</td>      
+        <td>
+          <a class="btn btn-primary btn-sm" routerLink="/editar/ficha/{{ficha.id}}">Ver/Editar</a>                    
+        </td> 
+      </tr>     
+    </tbody>
+  </table>
+

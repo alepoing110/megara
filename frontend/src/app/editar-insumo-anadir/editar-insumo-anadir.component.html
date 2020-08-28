@@ -1,0 +1,29 @@
+<div class="container">
+    <h1>Añadir Insumo</h1>
+    <h3>ID: {{insumo.id}}</h3>
+    <h3>NOMBRE: {{insumo.nombre}}</h3>
+    <form (ngSubmit)="saveInsumo()" #formulario="ngForm">
+      
+    <div class="form-group">
+        <div class="container">
+            <div class="col-5">
+                <div class="row">
+                    <h3>Cantidad actual: {{insumo.cantidad}}</h3>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="row">
+                    <label for="cantidad" edit= "false">CANTIDAD A AUMENTAR</label>
+                    <input [(ngModel)]="valor" type="number" class="form-control" id="cantidad" placeholder="Ingrese cantidad"
+                    required  name="cantidad" #cantidad="ngModel" digits>      
+                    <div *ngIf="cantidad.errors?.required && (cantidad.touched||cantidad.dirty)" class="alert alert-danger">El campo es obligatorio</div>    
+                    <div *ngIf="cantidad.errors?.digits && (cantidad.touched||cantidad.dirty)" class="alert alert-danger">Ingrese solo enteros</div>   
+                </div>
+
+            </div>
+        </div>
+    </div>      
+    <button type="submit" class="btn btn-success" [disabled]="!formulario.form.valid">Aumentar</button>
+    </form>
+    <h3>PRECIO INSUMO: {{insumo.precio}}</h3>
+</div>

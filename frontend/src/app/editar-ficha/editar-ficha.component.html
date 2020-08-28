@@ -1,0 +1,175 @@
+<div class="container">
+    <h1>Ficha técnica</h1>
+    <form (ngSubmit)="saveOrden()" #formulario="ngForm">
+
+      <div class="row col-md-6">
+        <div class="form-group">      
+          <label for="fecha_culminacion">FECHA DE CULMINACION</label>
+          <input editable [(ngModel)]="ficha.fecha_culminacion" type="date" class="form-control" id="fecha_culminacion" placeholder="Fecha de culminacion"     
+          required name="fecha_culminacion" #fecha_culminacion="ngModel" >      
+          <div *ngIf="fecha_culminacion.errors?.required && (fecha_culminacion.touched||fecha_culminacion.dirty)" class="alert alert-danger">El campo es obligatorio</div> 
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">      
+            <label for="tiempo_mantenimiento">TIEMPO DE MANTENIMIENTO</label>
+            <input editable [(ngModel)]="ficha.tiempo_mantenimiento" type="text" class="form-control" id="tiempo_mantenimiento" placeholder="El tiempo de mantenimiento"     
+            required maxlength="45" name="ficha.tiempo_mantenimiento" #tiempo_mantenimiento="ngModel">      
+            <div *ngIf="tiempo_mantenimiento.errors?.required && (tiempo_mantenimiento.touched||tiempo_mantenimiento.dirty)" class="alert alert-danger">El campo es obligatorio</div>             
+          </div>
+        </div>
+        
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="id_ot">ID OT</label>
+            <input  type="text" class="form-control" id="id_ot" name="id_ot" required readonly value="{{ficha.orden_trabajo_id}}">
+          </div>
+        </div>
+      </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">      
+            <label for="ubicacion_tecnica_empresa">ENCARGADO</label>
+            <input editable [(ngModel)]="orden.ubicacion_tecnica_empresa" type="text" class="form-control" id="ubicacion_tecnica_empresa" placeholder="Ubicación técnica en la empresa"     
+            required maxlength="50" name="ubicacion_tecnica_empresa" #ubicacion_tecnica_empresa="ngModel" pattern="^[a-zA-Z ]*$" >      
+            <div *ngIf="ubicacion_tecnica_empresa.errors?.required && (ubicacion_tecnica_empresa.touched||ubicacion_tecnica_empresa.dirty)" class="alert alert-danger">El campo es obligatorio</div>             
+            </div>
+        </div>
+    </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="fecha">FECHA CREACION</label>
+            <input [(ngModel)]="orden.fecha" type="date" class="form-control" id="fecha"     
+             name="fecha" #fecha="ngModel" readonly>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="fecha_inicio">FECHA INICIO</label>
+            <input [(ngModel)]="orden.fecha_inicio" type="date" class="form-control" id="fecha_inicio"
+             name="fecha_inicio" #fecha_inicio="ngModel" readonly>            
+          </div>
+        </div>        
+      </div>
+
+      <div class="form-group col-md-6">
+          <label for="nom_supervisor_empresa" >COORDINAR CON</label>
+          <input [(ngModel)]="orden.nom_supervisor_empresa" type="text" class="form-control" id="nom_supervisor_empresa" placeholder="Ingrese nombre del supervisor"
+           name="nom_supervisor_empresa" #nom_supervisor_empresa="ngModel" readonly>                
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          EQUIPO SOLICITANTE DE MANTENIMIENTO
+        </div>
+        <div class="card-body">
+          <div class="row">         
+            <div class="col-md-6">
+              <div class="form-group">      
+                <label for="equipo_empresa">NOMBRE DEL EQUIPO</label>
+                <input editable [(ngModel)]="orden.equipo_empresa" type="text" class="form-control" id="equipo_empresa" placeholder="Nombre del equipo"     
+                name="equipo_empresa" #equipo_empresa="ngModel"  readonly>                      
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="form-group">      
+                <label for="num_inventario_empresa">NUMERO DE INVENTARIO</label>
+                <input editable [(ngModel)]="orden.num_inventario_empresa" type="text" class="form-control" id="num_inventario_empresa" placeholder="Numero de inventario del equipo"     
+                name="num_inventario_empresa" #num_inventario_empresa="ngModel" readonly>                      
+              </div>
+            </div>
+          </div>
+          <div class="row">         
+            <div class="col-md-6">
+              <div class="form-group">      
+                <label for="tipo_empresa">TIPO </label>
+                <input editable [(ngModel)]="orden.tipo_empresa" type="text" class="form-control" id="tipo_empresa" placeholder="Tipo del equipo"     
+                 name="tipo_empresa" #tipo_empresa="ngModel" readonly>                      
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="form-group">      
+                <label for="serie_empresa">SERIE</label>
+                <input editable [(ngModel)]="orden.serie_empresa" type="text" class="form-control" id="serie_empresa" placeholder="Serie del equipo"     
+                name="serie_empresa" #serie_empresa="ngModel" readonly >                      
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group ">
+                <label for="marca" >MARCA</label>
+                <input [(ngModel)]="orden.marca_empresa" type="textt" class="form-control" id="marca_empresa" placeholder="Ingrese la marca del equipo"
+                name="marca_empresa" #marca_empresa="ngModel" readonly>                      
+                
+            </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group ">
+                <label for="modelo_empresa" >MODELO</label>
+                <input [(ngModel)]="orden.modelo_empresa" type="textt" class="form-control" id="modelo_empresa" placeholder="Ingrese el modelo del equipo"
+                name="modelo_empresa" #modelo_empresa="ngModel" readonly>                      
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group ">
+                <label for="procedencia_empresa" >PROCEDENCIA</label>
+                <input [(ngModel)]="orden.procedencia_empresa" type="textt" class="form-control" id="procedencia_empresa" placeholder="Ingrese la procedencia del equipo"
+                name="procedencia_empresa" #procedencia_empresa="ngModel" readonly>      
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="procedencia_ano_empresa">AÑO DE PRECEDENCIA</label>
+                <input [(ngModel)]="orden.procedencia_ano_empresa" type="date" class="form-control" id="procedencia_ano_empresa"
+                name="procedencia_ano_empresa" #procedencia_ano_empresa="ngModel" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">              
+              <div class="form-group ">
+                <label for="instalado_por_empresa" >INSTALADO POR</label>
+                <input [(ngModel)]="orden.instalado_por_empresa" type="textt" class="form-control" id="instalado_por_empresa" placeholder="Ingrese la empresa que instalo"
+                name="instalado_por_empresa" #instalado_por_empresa="ngModel" readonly>                      
+              </div>              
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="instalado_por_ano_empresa">AÑO DE INSTALACIÓN</label>
+                <input [(ngModel)]="orden.instalado_por_ano_empresa" type="date" class="form-control" id="instalado_por_ano_empresa"
+                 name="instalado_por_ano_empresa" #instalado_por_ano_empresa="ngModel" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="row col-md">
+            <div class="form-group ">
+              <label for="funcion_empresa" >FUNCIONES</label>
+              <input [(ngModel)]="orden.funcion_empresa" type="textt" class="form-control" id="funcion_empresa" placeholder="Ingrese la función en la empresa"
+              name="funcion_empresa" #funcion_empresa="ngModel" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group ">
+        <label for="descripcion" >DESCRIPCIÓN DE TAREAS</label>
+        <input [(ngModel)]="orden.descripcion" type="textt" class="form-control" id="descripcion" placeholder="Ingrese descripción"
+          name="descripcion" #descripcion="ngModel" readonly>      
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="!formulario.form.valid">Guardar</button>
+      </form> 
+
+      <div class="row col-md-4">
+        <a class="btn btn-primary btn-sm btn-danger" (click)="delete(equipo.id)">Imprimir</a>    
+      </div>
+    </div>

@@ -1,0 +1,146 @@
+<body>
+    <div class="wrapper" disabled="">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <img [src]="'assets/img/logo.jpg'" />
+            </div>
+
+            <ul class="list-unstyled components">
+                <p>MENÚ</p>
+                <li class="active">
+
+                </li>
+
+                <li *ngIf = "usuario_condicion">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Usuario</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li >
+                            <a [routerLink]="'/usuario'">Lista de usuarios</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="'/editar/usuario'">Crear usuario</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li *ngIf = "proveedor_condicion">
+                    <a href="#proveedor" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Proveedor</a>
+                    <ul class="collapse list-unstyled" id="proveedor">
+                        <li>
+                            <a [routerLink]="'/proveedor'">Lista de proveedores</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="'/editar/proveedor'">Crear proveedor</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li *ngIf = "inventario_condicion" >
+                    <a href="#inventario" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Inventario</a>
+                    <ul class="collapse list-unstyled" id="inventario">
+                      <li>
+                          <a [routerLink]="'/editar/pedido'">Generar pedido</a>
+                      </li>
+                      <li>
+                          <a [routerLink]="'/editar/insumo'">Crear insumo</a>
+                      </li>
+                      <li>
+                          <a [routerLink]="'/insumo'">Lista de insumos</a>
+                      </li>
+                      <li>
+                          <a [routerLink]="'/editar/herramienta'">Crear herramienta</a>
+                      </li>
+                      <li>
+                          <a [routerLink]="'/herramienta'">Lista de herramientas</a>
+                      </li>
+                      <li>
+                      <a [routerLink]="'/equipo'">Mostrar equipos para mantenimento</a>
+                      </li>
+                      <li>
+                          <a [routerLink]="'/editar/equipo'">Crear equipo para mantenimento</a>
+                      </li>
+
+                    </ul>
+                </li >
+                <li *ngIf = "rrhh_condicion">
+                    <a href="#rrhh" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">RR.HH.</a>
+                    <ul class="collapse list-unstyled" id="rrhh">
+                        <li>
+                            <a [routerLink]="'/rrhh'">Lista de RRHH</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="'/editar/rrhh'">Crear RRHH</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li *ngIf = "ot_condicion">
+                    <a href="#ot" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Orden de trabajo</a>
+                    <ul class="collapse list-unstyled" id="ot">
+                      <li>
+                          <a [routerLink] = "'/ficha'">Historial de mantenimento</a>
+                      </li>
+                      <li >
+                      <a [routerLink] = "'/editar/ficha'">Generar ficha tecnica</a>
+                      </li>
+                      <li>
+                          <a [routerLink] = "'/orden'">Cronograma de mantenimento</a>
+                      </li>
+                      <li>
+                          <a [routerLink] = "'/editar/orden'">Generar orden de trabajo</a>
+                      </li>
+                      <li>
+                          <a [routerLink] = "'/grupo-trabajo'">Reporte del operador</a>
+                      </li>
+
+                    </ul>
+                </li>
+
+            </ul>
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a (click)="salir()" [routerLink]="'/'" class="download">Salir</a>
+
+                </li>
+            </ul>
+
+        </nav>
+
+        <!-- Page Content  -->
+
+        <div id="content">
+
+            <div class="container">
+
+                <div class="container">
+
+                    <form (ngSubmit)="getUsuarios()" #formulario="ngForm">
+                        <div align="center" *ngIf="bienvenida">
+                            <h3>EMPRESA MPREVENTIVO GAS</h3>
+                            <h3>BIENVENIDO AL SISTEMA</h3>
+
+                        </div>
+                        <div *ngIf="login_confirmacion">
+                            <h3>Ingrese usuario contraseña</h3>
+                            <div class="form-group row">
+                                <label for="nick" class="col-sm-2 col-form-label">Usuario</label>
+                                <input [(ngModel)]="usuario" type="text" class="form-control col-sm-4" id="nick"
+                                name="usuario_id" #usuario_id="ngModel" required >
+                                </div>
+                            <div class="form-group row">
+                                <label for="password" class="col-sm-2 col-form-label">Password</label>
+                                <input [(ngModel)]="password"  type="password" class="form-control col-sm-4" id="password"
+                                name="password_id" #password_id="ngModel" required>
+                                </div>
+                            <button  type="submit" class="btn btn-success" [disabled]="!formulario.form.valid">Ingresar</button>
+                        </div>
+                    </form>
+                </div>
+               <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+  </body>
+

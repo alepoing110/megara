@@ -1,0 +1,25 @@
+<h1>Cronograma de mantenimiento</h1>
+  <table class="table ">
+    <thead class="table table-hover">
+      <tr>
+        <th scope="col">Fecha</th>
+        <th scope="col">Nro. O.T.</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Responsable</th>
+        <th scope="col">Editar O.T.</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ordenTrabajo of ordenTrabajos" >
+        <th>{{ordenTrabajo.fecha}}</th>
+        <td>{{ordenTrabajo.id}}</td>
+        <td>{{ordenTrabajo.descripcion}}</td>
+        <td>{{ordenTrabajo.nom_supervisor_empresa}}</td>        
+        <td>
+            <a class="btn btn-primary btn-sm" routerLink="/editar/orden/{{ordenTrabajo.id}}">Ver/Editar</a>   
+            <a class="btn btn-primary btn-sm btn-danger" (click)="delete(ordenTrabajo.id)">Eliminar</a>    
+        </tr>     
+    </tbody>
+  </table>
+

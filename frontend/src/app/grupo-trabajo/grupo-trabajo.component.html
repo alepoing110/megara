@@ -1,0 +1,51 @@
+<div class="container">
+    <h1>Generar grupo de trabajo</h1>
+    <form (ngSubmit)="agregarRrhh()" #formulario="ngForm">      
+      <div class="card">
+        <div class="card-header">
+          RECURSO HUMANO
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+              <label for="orden_trabajo_id">NUMERO DE ORDEN DE TRABAJO</label>
+              <input [(ngModel)]="id_orden" type="text" class="form-control" id="orden_trabajo_id" placeholder="Ingrese el numero de orden de trabajo"     
+              required maxlength="45" name="orden_trabajo_id" #orden_trabajo_id="ngModel" digits [value] = "id_orden" readonly>
+              <div *ngIf="orden_trabajo_id.errors?.required && (orden_trabajo_id.touched||orden_trabajo_id.dirty)" class="alert alert-danger">El campo es obligatorio</div> 
+              <div *ngIf="orden_trabajo_id.errors?.digits && (orden_trabajo_id.touched||orden_trabajo_id.dirty)" class="alert alert-danger">Solo numeros</div> 
+          </div>
+        
+          <div class="form-group">
+            <label for="personal_id" >RR.HH.</label>
+            <select name="personal_id" [(ngModel)]="rrhh" class="form-control"   id="personal_id" #personal_id="ngModel" required>
+              <option [ngValue]="itemh" *ngFor="let itemh of rrhhs">ID:{{itemh.id}} - {{itemh.nombre}} {{itemh.ap_paterno}} {{itemh.ap_materno}}</option>
+              </select>         
+            <div *ngIf="personal_id.errors?.required && (personal_id.touched||personal_id.dirty)" class="alert alert-danger">El campo es obligatorio</div>         
+          </div>
+        </div>        
+      </div>            
+      <button type="submit" class="btn btn-success" [disabled]="!formulario.form.valid">Añadir</button>
+       
+      <table class="table ">
+        <thead class="table table-hover">
+          <tr>
+            <th scope="col">ID O.T.</th>
+            <th scope="col">ID RR.HH.</th>
+            <th scope="col">NOMBRE(S)</th>
+            <th scope="col">AP. PATERNO</th>
+            <th scope="col">AP. MATERNO</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let grupo of lista">
+            <td>{{grupo.orden_trabajo_id}}</td>
+            <td>{{grupo.personal_id}}</td>
+            <td>{{grupo.nombre}}</td>               
+            <td>{{grupo.ap_paterno}}</td>
+            <td>{{grupo.ap_materno}}</td>          
+        </tbody>
+      </table>
+      </form> 
+      <div align="right"><input class="btn btn-primary" type="button" value="Guardar e imprimir" (click)="saveGrupo()"></div>
+    </div>
+    

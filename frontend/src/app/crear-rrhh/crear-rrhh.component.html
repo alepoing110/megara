@@ -1,0 +1,44 @@
+<div class="container">
+    <h1>Crear RRHH</h1>
+    <form (ngSubmit)="saveRrhh()" #formulario="ngForm">
+      <div class="form-group">
+          <label for="nombre">NOMBRE</label>
+          <input [(ngModel)]="rrhh.nombre" type="text" class="form-control" id="nombre" placeholder="Ingrese nombre"     
+          required maxlength="20" name="nombre" #nombre="ngModel" pattern="^[a-zA-Z. ]*$">
+          <div *ngIf="nombre.errors?.required && (nombre.touched||nombre.dirty)" class="alert alert-danger">El campo es obligatorio</div> 
+          <div *ngIf="nombre.errors?.pattern && (nombre.touched||nombre.dirty)" class="alert alert-danger">Solo letras</div> 
+        </div>
+      <div class="form-group">
+        <label for="ap_paterno" >APELLIDO PATERNO</label>
+        <input [(ngModel)]="rrhh.ap_paterno" type="text" class="form-control" id="ap_paterno" placeholder="Ingrese apellido paterno"
+        required maxlength="20" name="ap_paterno" #ap_paterno="ngModel" pattern="^[a-zA-Z ]*$">      
+        <div *ngIf="ap_paterno.errors?.required && (ap_paterno.touched||ap_paterno.dirty)" class="alert alert-danger">El campo es obligatorio</div>      
+        <div *ngIf="ap_paterno.errors?.pattern && (ap_paterno.touched||ap_paterno.dirty)" class="alert alert-danger">Solo letras</div>    
+      </div>
+      
+      <div class="form-group ">
+          <label for="ap_materno" >APELLIDO MATERNO</label>
+          <input [(ngModel)]="rrhh.ap_materno" type="textt" class="form-control" id="ap_materno" placeholder="Ingrese apellido materno"
+          required maxlength="20" name="ap_materno" #ap_materno="ngModel" pattern="^[a-zA-Z ]*$">      
+          <div *ngIf="ap_materno.errors?.required && (ap_materno.touched||ap_materno.dirty)" class="alert alert-danger">El campo es obligatorio</div>              
+          <div *ngIf="ap_materno.errors?.pattern && (ap_materno.touched||ap_materno.dirty)" class="alert alert-danger">Solo letras</div>              
+      </div>
+      <div class="form-group ">
+          <label for="especialidad" >ESPECIALIDAD</label>
+          <input [(ngModel)]="rrhh.especialidad" type="text" class="form-control" id="especialidad" placeholder="Ingrese especialidad"
+          required maxlength="45" name="especialidad" #especialidad="ngModel" pattern="^[a-zA-Z ]*$">      
+          <div *ngIf="especialidad.errors?.required && (especialidad.touched||especialidad.dirty)" class="alert alert-danger">El campo es obligatorio</div>              
+          <div *ngIf="especialidad.errors?.pattern && (especialidad.touched||especialidad.dirty)" class="alert alert-danger">Solo letras</div>              
+      </div>
+  
+
+      <div class="form-group ">
+          <label for="direccion" >DIRECCION</label>
+          <input [(ngModel)]="rrhh.direccion" type="text" class="form-control" id="precio" placeholder="Ingrese direccion"
+          required maxlength="100" name="direccion" #direccion="ngModel" pattern="^[a-zA-Z.# ]*$">      
+          <div *ngIf="direccion.errors?.required && (direccion.touched||direccion.dirty)" class="alert alert-danger">El campo es obligatorio</div>              
+          <div *ngIf="direccion.errors?.pattern && (direccion.touched||direccion.dirty)" class="alert alert-danger">Ingrese solo letras</div>
+        </div>
+      <button type="submit" class="btn btn-success" [disabled]="!formulario.form.valid">Guardar</button>
+      </form> 
+    </div>
